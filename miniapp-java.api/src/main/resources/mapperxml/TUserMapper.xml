@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TUserMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TUser">
+    <!--@mbg.generated-->
+    <!--@Table t_user-->
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <id column="OPEN_ID" jdbcType="VARCHAR" property="openId" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    USER_ID, OPEN_ID, EMAIL, `PASSWORD`, NICK_NAME, PHONE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from t_user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and OPEN_ID = #{openId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="USER_ID" keyProperty="userId" parameterType="com.elphen.miniapp.domain.entity.TUser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user (OPEN_ID, EMAIL, `PASSWORD`, 
+      NICK_NAME, PHONE)
+    values (#{openId,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="USER_ID" keyProperty="userId" parameterType="com.elphen.miniapp.domain.entity.TUser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="openId != null">
+        OPEN_ID,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="password != null">
+        `PASSWORD`,
+      </if>
+      <if test="nickName != null">
+        NICK_NAME,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TUser">
+    <!--@mbg.generated-->
+    update t_user
+    <set>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        `PASSWORD` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and OPEN_ID = #{openId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TUser">
+    <!--@mbg.generated-->
+    update t_user
+    set EMAIL = #{email,jdbcType=VARCHAR},
+      `PASSWORD` = #{password,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+      and OPEN_ID = #{openId,jdbcType=VARCHAR}
+  </update>
+    <select id="selectByOpenId" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"></include>
+      from t_user
+      where OPEN_ID = #{openId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserNameByUerId" resultType="java.lang.String">
+      select NICK_NAME
+      from t_user
+      where USER_ID = #{userId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByEmail" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"></include>
+      from t_user
+      where EMAIL = #{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByUserEvent" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"></include>
+      from t_user
+      <where>
+        USER_ID in
+        <foreach collection="list" item="userEvent" separator="," open="(" close=")">
+          #{userEvent.userId,jdbcType=INTEGER}
+        </foreach>
+      </where>
+    </select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TUserGroupMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TUserGroup">
+    <!--@mbg.generated-->
+    <!--@Table t_user_group-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <id column="GROUP_ID" jdbcType="VARCHAR" property="groupId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID,USER_ID,GROUP_ID
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from t_user_group
+    where ID = #{id,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+      and GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TUserGroup" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user_group (USER_ID, GROUP_ID)
+    values (#{userId,jdbcType=INTEGER}, #{groupId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TUserGroup" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="groupId != null">
+        GROUP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+    <select id="selectByUserIdAndGroupId" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"></include>
+      from t_user_group
+      where GROUP_ID = #{groupId,jdbcType=VARCHAR}
+        and USER_ID =  #{userId,jdbcType=INTEGER}
+    </select>
+</mapper>

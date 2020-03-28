@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TEventMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TEvent">
+    <!--@mbg.generated-->
+    <!--@Table t_event-->
+    <id column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+    <id column="FILE_ID" jdbcType="INTEGER" property="fileId" />
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="IS_PRIVATE" jdbcType="BOOLEAN" property="isPrivate" />
+    <result column="IS_STOPED" jdbcType="BOOLEAN" property="isStoped" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="STOP_TIME" jdbcType="TIMESTAMP" property="stopTime" />
+
+  </resultMap>
+  <resultMap id="UsingAliasResultMap" type="com.elphen.miniapp.domain.entity.TEvent">
+    <!--@mbg.generated-->
+    <!--@Table t_event-->
+    <id column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+    <id column="FILE_ID" jdbcType="INTEGER" property="fileId" />
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="IS_PRIVATE" jdbcType="BOOLEAN" property="isPrivate" />
+    <result column="IS_STOPED" jdbcType="BOOLEAN" property="isStoped" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="STOP_TIME" jdbcType="TIMESTAMP" property="stopTime" />
+    <association property="fileInfo" javaType="com.elphen.miniapp.domain.entity.TFileInfo"
+                 resultMap="com.elphen.miniapp.api.mapper.TFileInfoMapper.BaseResultMap"
+                 column="eventFileId"/>
+  </resultMap>
+  <resultMap id="UsingAliasResultMap-1" type="com.elphen.miniapp.domain.entity.TEvent">
+    <!--@mbg.generated-->
+    <!--@Table t_event-->
+    <id column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+    <id column="FILE_ID" jdbcType="INTEGER" property="fileId" />
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="IS_PRIVATE" jdbcType="BOOLEAN" property="isPrivate" />
+    <result column="IS_STOPED" jdbcType="BOOLEAN" property="isStoped" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="STOP_TIME" jdbcType="TIMESTAMP" property="stopTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    EVENT_ID, FILE_ID, USER_ID, IS_PRIVATE, IS_STOPED, CREATE_TIME, UPDATE_TIME, STOP_TIME
+  </sql>
+  <sql id="UsingAlias_Column_List">
+    te.EVENT_ID,
+	te.FILE_ID,
+	te.USER_ID,
+	te.IS_PRIVATE,
+	te.IS_STOPED,
+	te.CREATE_TIME,
+	te.UPDATE_TIME,
+	te.STOP_TIME,
+	te.FILE_ID AS eventFileId,
+	tfi.FILE_INFO_ID AS fileInfoId,
+	tfi.FILE_NAME AS fileName,
+	tfi.IS_STOPED AS isStoped,
+	tfi.IS_GENERATED AS isGenerated,
+	tfi.ROW_COUNT AS rowCount,
+	tfi.ORDER_TYPE AS orderType,
+	tfi.ORDER_INDEX AS orderIndex,
+	tfi.FILE_PATH AS filePath,
+	tfi.CREATE_TIME AS createTime,
+	tfi.UPDATE_TIME AS updateTime
+  </sql>
+  <sql id="UsingAlias_Column_List-1">
+    te.EVENT_ID,
+	te.FILE_ID,
+	te.USER_ID,
+	te.IS_PRIVATE,
+	te.IS_STOPED,
+	te.CREATE_TIME,
+	te.UPDATE_TIME,
+	te.STOP_TIME,
+	tfi.FILE_ID AS "fileInfo.fileId",
+	tfi.FILE_NAME AS "fileInfo.fileName",
+	tfi.ROW_COUNT AS "fileInfo.rowCount",
+	tfi.COL_COUNT AS "fileInfo.colCount",
+	tfi.ORDER_TYPE AS "fileInfo.orderType",
+	tfi.ORDER_INDEX AS "fileInfo.orderIndex",
+	tfi.IS_STOPED AS "fileIno.isStoped",
+	tfi.IS_GENERATED AS "fileInfo.isGenerated",
+	tfi.FILE_PATH AS "fileInfo.filePath",
+	tfi.CREATE_TIME AS "fileInfo.createTime",
+	tfi.UPDATE_TIME AS "fileInfo.updateTime"
+  </sql>
+  <sql id="UsingAlias_delete_sql">
+    delete te,tfi from t_event as te INNER JOIN t_file_Info as tfi ON te.FILE_ID = tfi.FILE_INFO_ID
+  </sql>
+  <sql id="UsingAlias_select_sql">
+    select
+    <include refid="UsingAlias_Column_List" />
+    from t_event as te INNER JOIN t_file_info as tfi ON te.FILE_ID = tfi.FILE_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="UsingAliasResultMap">
+    <!--@mbg.generated-->
+   <include refid="UsingAlias_select_sql"/>
+    where te.EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and te.FILE_ID = #{fileId,jdbcType=INTEGER}
+      and te.USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    <include refid="UsingAlias_delete_sql"/>
+    where te.EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and te.FILE_ID = #{fileId,jdbcType=INTEGER}
+      and te.USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="EVENT_ID" keyProperty="eventId" parameterType="com.elphen.miniapp.domain.entity.TEvent" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_event (FILE_ID, USER_ID, IS_PRIVATE, 
+      IS_STOPED, CREATE_TIME, UPDATE_TIME, 
+      STOP_TIME)
+    values (#{fileId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{isPrivate,jdbcType=BOOLEAN}, 
+      #{isStoped,jdbcType=BOOLEAN}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{stopTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="EVENT_ID" keyProperty="eventId" parameterType="com.elphen.miniapp.domain.entity.TEvent" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_event
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        FILE_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="isPrivate != null">
+        IS_PRIVATE,
+      </if>
+      <if test="isStoped != null">
+        IS_STOPED,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="stopTime != null">
+        STOP_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isPrivate != null">
+        #{isPrivate,jdbcType=BOOLEAN},
+      </if>
+      <if test="isStoped != null">
+        #{isStoped,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null">
+        #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TEvent">
+    <!--@mbg.generated-->
+    update t_event
+    <set>
+      <if test="isPrivate != null">
+        IS_PRIVATE = #{isPrivate,jdbcType=BOOLEAN},
+      </if>
+      <if test="isStoped != null">
+        IS_STOPED = #{isStoped,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopTime != null">
+        STOP_TIME = #{stopTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and FILE_ID = #{fileId,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TEvent">
+    <!--@mbg.generated-->
+    update t_event
+    set IS_PRIVATE = #{isPrivate,jdbcType=BOOLEAN},
+      IS_STOPED = #{isStoped,jdbcType=BOOLEAN},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      STOP_TIME = #{stopTime,jdbcType=TIMESTAMP}
+    where EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and FILE_ID = #{fileId,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByUserId" resultMap="UsingAliasResultMap-1" resultType="java.util.List">
+        select <include refid="UsingAlias_Column_List-1"/>
+      from t_event as te inner join t_file_info as tfi on te.FILE_ID = tfi.FILE_ID
+      where te.USER_ID = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByFileId">
+        <include refid="UsingAlias_delete_sql" />
+        where te.FILE_ID = #{fileId,jdbcType=INTEGER}
+    </delete>
+  <select id="selectUserIdByEventId" resultType="java.lang.Integer">
+    select USER_ID
+    from t_event
+    where EVENT_ID = #{eventId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByEventId">
+    <include refid="UsingAlias_delete_sql" />
+    where  te.EVENT_ID= #{eventId,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByEventId" resultMap="UsingAliasResultMap-1">
+    select <include refid="UsingAlias_Column_List-1"/>
+    from t_event as te inner join t_file_info as tfi on te.FILE_ID = tfi.FILE_ID
+    where te.EVENT_ID = #{eventId,jdbcType=INTEGER}
+  </select>
+    <select id="selectByFileId" resultMap="BaseResultMap">
+      select <include refid="UsingAlias_Column_List-1"></include>
+      from t_event as te inner join t_file_info as tfi on te.FILE_ID = tfi.FILE_ID
+      where te.FILE_ID = #{fileId,jdbcType=INTEGER}
+    </select>
+    <select id="selectByUserEvent" resultMap="BaseResultMap">
+      select <include refid="UsingAlias_Column_List-1"></include>
+      from t_event as te inner join t_file_info as tfi on te.FILE_ID = tfi.FILE_ID
+      <where>
+        te.EVENT_ID in
+        <foreach collection="list" item="userEvent" separator="," open="(" close=")" index="">
+          #{userEvent.eventId,jdbcType=INTEGER}
+        </foreach>
+      </where>
+    </select>
+</mapper>

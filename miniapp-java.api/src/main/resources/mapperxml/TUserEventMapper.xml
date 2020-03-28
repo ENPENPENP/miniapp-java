@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TUserEventMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TUserEvent">
+    <!--@mbg.generated-->
+    <!--@Table t_user_event-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="IS_EDITED" jdbcType="BOOLEAN" property="isEdited" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, EVENT_ID, USER_ID, IS_EDITED
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_event
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_user_event
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TUserEvent" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user_event (EVENT_ID, USER_ID, IS_EDITED
+      )
+    values (#{eventId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{isEdited,jdbcType=BOOLEAN}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TUserEvent" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user_event
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        EVENT_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="isEdited != null">
+        IS_EDITED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isEdited != null">
+        #{isEdited,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TUserEvent">
+    <!--@mbg.generated-->
+    update t_user_event
+    <set>
+      <if test="eventId != null">
+        EVENT_ID = #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="isEdited != null">
+        IS_EDITED = #{isEdited,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TUserEvent">
+    <!--@mbg.generated-->
+    update t_user_event
+    set EVENT_ID = #{eventId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      IS_EDITED = #{isEdited,jdbcType=BOOLEAN}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByUserIdAndEventId" resultMap="BaseResultMap" resultType="com.elphen.miniapp.domain.entity.TUserEvent">
+    select <include refid="Base_Column_List"></include>
+    from t_user_event
+    where USER_ID = #{userId,jdbcType=INTEGER}
+    and EVENT_ID = #{eventId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByEventId">
+    delete from t_user_event
+    where EVENT_ID = #{eventId,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from t_user_event
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEventId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from t_user_event
+    where EVENT_ID = #{eventId,jdbcType=INTEGER}
+  </select>
+
+</mapper>

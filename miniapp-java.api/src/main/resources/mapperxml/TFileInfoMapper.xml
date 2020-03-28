@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TFileInfoMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TFileInfo">
+    <!--@mbg.generated-->
+    <!--@Table t_file_info-->
+    <id column="FILE_ID" jdbcType="INTEGER" property="fileId" />
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+    <result column="IS_STOPED" jdbcType="BOOLEAN" property="isStoped" />
+    <result column="IS_GENERATED" jdbcType="BOOLEAN" property="isGenerated" />
+    <result column="ROW_COUNT" jdbcType="INTEGER" property="rowCount" />
+    <result column="COL_COUNT" jdbcType="INTEGER" property="colCount" />
+    <result column="ORDER_INDEX" jdbcType="INTEGER" property="orderIndex" />
+    <result column="ORDER_TYPE" jdbcType="BOOLEAN" property="orderType" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    FILE_ID, FILE_NAME, IS_STOPED, IS_GENERATED, `ROW_COUNT`, COL_COUNT, ORDER_INDEX, 
+    ORDER_TYPE, FILE_PATH, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_file_info
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from t_file_info
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="FILE_ID" keyProperty="fileId" parameterType="com.elphen.miniapp.domain.entity.TFileInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_file_info (FILE_NAME, IS_STOPED, IS_GENERATED, 
+      `ROW_COUNT`, COL_COUNT, ORDER_INDEX, 
+      ORDER_TYPE, FILE_PATH, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{fileName,jdbcType=VARCHAR}, #{isStoped,jdbcType=BOOLEAN}, #{isGenerated,jdbcType=BOOLEAN}, 
+      #{rowCount,jdbcType=INTEGER}, #{colCount,jdbcType=INTEGER}, #{orderIndex,jdbcType=INTEGER}, 
+      #{orderType,jdbcType=BOOLEAN}, #{filePath,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="FILE_ID" keyProperty="fileId" parameterType="com.elphen.miniapp.domain.entity.TFileInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_file_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileName != null">
+        FILE_NAME,
+      </if>
+      <if test="isStoped != null">
+        IS_STOPED,
+      </if>
+      <if test="isGenerated != null">
+        IS_GENERATED,
+      </if>
+      <if test="rowCount != null">
+        `ROW_COUNT`,
+      </if>
+      <if test="colCount != null">
+        COL_COUNT,
+      </if>
+      <if test="orderIndex != null">
+        ORDER_INDEX,
+      </if>
+      <if test="orderType != null">
+        ORDER_TYPE,
+      </if>
+      <if test="filePath != null">
+        FILE_PATH,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="isStoped != null">
+        #{isStoped,jdbcType=BOOLEAN},
+      </if>
+      <if test="isGenerated != null">
+        #{isGenerated,jdbcType=BOOLEAN},
+      </if>
+      <if test="rowCount != null">
+        #{rowCount,jdbcType=INTEGER},
+      </if>
+      <if test="colCount != null">
+        #{colCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderIndex != null">
+        #{orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=BOOLEAN},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TFileInfo">
+    <!--@mbg.generated-->
+    update t_file_info
+    <set>
+      <if test="fileName != null">
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="isStoped != null">
+        IS_STOPED = #{isStoped,jdbcType=BOOLEAN},
+      </if>
+      <if test="isGenerated != null">
+        IS_GENERATED = #{isGenerated,jdbcType=BOOLEAN},
+      </if>
+      <if test="rowCount != null">
+        `ROW_COUNT` = #{rowCount,jdbcType=INTEGER},
+      </if>
+      <if test="colCount != null">
+        COL_COUNT = #{colCount,jdbcType=INTEGER},
+      </if>
+      <if test="orderIndex != null">
+        ORDER_INDEX = #{orderIndex,jdbcType=INTEGER},
+      </if>
+      <if test="orderType != null">
+        ORDER_TYPE = #{orderType,jdbcType=BOOLEAN},
+      </if>
+      <if test="filePath != null">
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TFileInfo">
+    <!--@mbg.generated-->
+    update t_file_info
+    set FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      IS_STOPED = #{isStoped,jdbcType=BOOLEAN},
+      IS_GENERATED = #{isGenerated,jdbcType=BOOLEAN},
+      `ROW_COUNT` = #{rowCount,jdbcType=INTEGER},
+      COL_COUNT = #{colCount,jdbcType=INTEGER},
+      ORDER_INDEX = #{orderIndex,jdbcType=INTEGER},
+      ORDER_TYPE = #{orderType,jdbcType=BOOLEAN},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+  </update>
+    <delete id="deleteByFileId">
+        delete from t_file_info
+        where FILE_ID = #{fileId,jdbcType=INTEGER}
+    </delete>
+    <select id="selectByFileId" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" />
+        from t_file_info
+        where
+        FILE_ID = #{fileId,jdbcType=INTEGER}
+    </select>
+</mapper>

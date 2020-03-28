@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TEventGroupMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TEventGroup">
+    <!--@mbg.generated-->
+    <!--@Table t_event_group-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <id column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+    <id column="GROUP_ID" jdbcType="VARCHAR" property="groupId" />
+    <result column="IS_ALL_USER" jdbcType="BOOLEAN" property="isAllUser" />
+    <result column="IS_PRIVATE" jdbcType="BOOLEAN" property="isPrivate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, EVENT_ID, GROUP_ID, IS_ALL_USER, IS_PRIVATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_event_group
+    where ID = #{id,jdbcType=INTEGER}
+      and EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from t_event_group
+    where ID = #{id,jdbcType=INTEGER}
+      and EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TEventGroup" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_event_group (EVENT_ID, GROUP_ID, IS_ALL_USER, 
+      IS_PRIVATE)
+    values (#{eventId,jdbcType=INTEGER}, #{groupId,jdbcType=VARCHAR}, #{isAllUser,jdbcType=BOOLEAN}, 
+      #{isPrivate,jdbcType=BOOLEAN})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TEventGroup" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_event_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        EVENT_ID,
+      </if>
+      <if test="groupId != null">
+        GROUP_ID,
+      </if>
+      <if test="isAllUser != null">
+        IS_ALL_USER,
+      </if>
+      <if test="isPrivate != null">
+        IS_PRIVATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="isAllUser != null">
+        #{isAllUser,jdbcType=BOOLEAN},
+      </if>
+      <if test="isPrivate != null">
+        #{isPrivate,jdbcType=BOOLEAN},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TEventGroup">
+    <!--@mbg.generated-->
+    update t_event_group
+    <set>
+      <if test="isAllUser != null">
+        IS_ALL_USER = #{isAllUser,jdbcType=BOOLEAN},
+      </if>
+      <if test="isPrivate != null">
+        IS_PRIVATE = #{isPrivate,jdbcType=BOOLEAN},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+      and EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TEventGroup">
+    <!--@mbg.generated-->
+    update t_event_group
+    set IS_ALL_USER = #{isAllUser,jdbcType=BOOLEAN},
+      IS_PRIVATE = #{isPrivate,jdbcType=BOOLEAN}
+    where ID = #{id,jdbcType=INTEGER}
+      and EVENT_ID = #{eventId,jdbcType=INTEGER}
+      and GROUP_ID = #{groupId,jdbcType=VARCHAR}
+  </update>
+    <select id="selectByEventIdAndGroupId" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"></include>
+      from t_event_group
+      where EVENT_ID = #{eventId,jdbcType=INTEGER}
+        and GROUP_ID = #{groupId,jdbcType=VARCHAR}
+    </select>
+</mapper>

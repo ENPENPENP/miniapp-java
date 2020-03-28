@@ -1,0 +1,33 @@
+server:
+  port: 24560
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://120.76.129.150:4306/my_miniapp?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  application:
+    name: miniapp-java-authserver
+
+mybatis:
+  typeAliasesPackage: com.elphen.miniapp.domain.entity
+  mapperLocations: /mapperxml/**/*.xml
+  configLocation: classpath:/mybatis-config.xml
+
+wx:
+  appid: wxbf0fb85a0581f240
+  secret: 1243a0ce5c6381694dfd4b84d4fe5721
+  token: #微信小程序消息服务器配置的token
+  aesKey: #微信小程序消息服务器配置的EncodingAESKey
+  msgDataFormat: JSON

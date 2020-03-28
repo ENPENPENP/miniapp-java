@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TUserMsgMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TUserMsg">
+    <!--@mbg.generated-->
+    <!--@Table t_user_msg-->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <id column="MESSAGE" jdbcType="VARCHAR" property="message" />
+    <result column="MESSAG_TYPE" jdbcType="INTEGER" property="messagType" />
+    <result column="EVENT_ID" jdbcType="INTEGER" property="eventId" />
+    <result column="GROUP_ID" jdbcType="INTEGER" property="groupId" />
+    <result column="IS_READED" jdbcType="BOOLEAN" property="isReaded" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, USER_ID, MESSAGE, MESSAG_TYPE, EVENT_ID, GROUP_ID, IS_READED, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_msg
+    where ID = #{id,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+      and MESSAGE = #{message,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from t_user_msg
+    where ID = #{id,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+      and MESSAGE = #{message,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TUserMsg" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user_msg (USER_ID, MESSAGE, MESSAG_TYPE, 
+      EVENT_ID, GROUP_ID, IS_READED, 
+      CREATE_TIME)
+    values (#{userId,jdbcType=INTEGER}, #{message,jdbcType=VARCHAR}, #{messagType,jdbcType=INTEGER}, 
+      #{eventId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER}, #{isReaded,jdbcType=BOOLEAN}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ID" keyProperty="id" parameterType="com.elphen.miniapp.domain.entity.TUserMsg" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into t_user_msg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="message != null">
+        MESSAGE,
+      </if>
+      <if test="messagType != null">
+        MESSAG_TYPE,
+      </if>
+      <if test="eventId != null">
+        EVENT_ID,
+      </if>
+      <if test="groupId != null">
+        GROUP_ID,
+      </if>
+      <if test="isReaded != null">
+        IS_READED,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="messagType != null">
+        #{messagType,jdbcType=INTEGER},
+      </if>
+      <if test="eventId != null">
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="isReaded != null">
+        #{isReaded,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TUserMsg">
+    <!--@mbg.generated-->
+    update t_user_msg
+    <set>
+      <if test="messagType != null">
+        MESSAG_TYPE = #{messagType,jdbcType=INTEGER},
+      </if>
+      <if test="eventId != null">
+        EVENT_ID = #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="groupId != null">
+        GROUP_ID = #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="isReaded != null">
+        IS_READED = #{isReaded,jdbcType=BOOLEAN},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+      and MESSAGE = #{message,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TUserMsg">
+    <!--@mbg.generated-->
+    update t_user_msg
+    set MESSAG_TYPE = #{messagType,jdbcType=INTEGER},
+      EVENT_ID = #{eventId,jdbcType=INTEGER},
+      GROUP_ID = #{groupId,jdbcType=INTEGER},
+      IS_READED = #{isReaded,jdbcType=BOOLEAN},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+      and USER_ID = #{userId,jdbcType=INTEGER}
+      and MESSAGE = #{message,jdbcType=VARCHAR}
+  </update>
+</mapper>

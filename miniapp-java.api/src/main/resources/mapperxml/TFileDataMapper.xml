@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elphen.miniapp.api.mapper.TFileDataMapper">
+  <resultMap id="BaseResultMap" type="com.elphen.miniapp.domain.entity.TFileData">
+    <!--@mbg.generated-->
+    <!--@Table t_file_data-->
+    <id column="FILE_ID" jdbcType="INTEGER" property="fileId" />
+    <id column="ROW_INDEX" jdbcType="INTEGER" property="rowIndex" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="ROW_TYPE" jdbcType="INTEGER" property="rowType" />
+    <result column="ROW_DATA" jdbcType="OTHER" property="rowData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    FILE_ID, ROW_INDEX, USER_ID, ROW_TYPE, ROW_DATA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from t_file_data
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+      and ROW_INDEX = #{rowIndex,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from t_file_data
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+      and ROW_INDEX = #{rowIndex,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.elphen.miniapp.domain.entity.TFileData">
+    <!--@mbg.generated-->
+    insert into t_file_data (FILE_ID, ROW_INDEX, USER_ID, 
+      ROW_TYPE, ROW_DATA)
+    values (#{fileId,jdbcType=INTEGER}, #{rowIndex,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{rowType,jdbcType=INTEGER}, #{rowData,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elphen.miniapp.domain.entity.TFileData">
+    <!--@mbg.generated-->
+    insert into t_file_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        FILE_ID,
+      </if>
+      <if test="rowIndex != null">
+        ROW_INDEX,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="rowType != null">
+        ROW_TYPE,
+      </if>
+      <if test="rowData != null">
+        ROW_DATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=INTEGER},
+      </if>
+      <if test="rowIndex != null">
+        #{rowIndex,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="rowType != null">
+        #{rowType,jdbcType=INTEGER},
+      </if>
+      <if test="rowData != null">
+        #{rowData,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elphen.miniapp.domain.entity.TFileData">
+    <!--@mbg.generated-->
+    update t_file_data
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="rowType != null">
+        ROW_TYPE = #{rowType,jdbcType=INTEGER},
+      </if>
+      <if test="rowData != null">
+        ROW_DATA = #{rowData,jdbcType=OTHER},
+      </if>
+    </set>
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+      and ROW_INDEX = #{rowIndex,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elphen.miniapp.domain.entity.TFileData">
+    <!--@mbg.generated-->
+    update t_file_data
+    set USER_ID = #{userId,jdbcType=INTEGER},
+      ROW_TYPE = #{rowType,jdbcType=INTEGER},
+      ROW_DATA = #{rowData,jdbcType=OTHER}
+    where FILE_ID = #{fileId,jdbcType=INTEGER}
+      and ROW_INDEX = #{rowIndex,jdbcType=INTEGER}
+  </update>
+    <delete id="deleteByFileId">
+      delete from t_file_data
+      where FILE_ID = #{fileDataId,jdbcType=INTEGER}
+    </delete>
+    <select id="selectAllByFileId" resultType="com.elphen.miniapp.domain.entity.TFileData">
+      select <include refid="Base_Column_List"/>
+      from t_file_data
+      where FILE_ID = #{fileId,jdbcType=INTEGER}
+      order by ROW_INDEX ASC
+    </select>
+    <select id="selectColNameDataByFileId" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"></include>
+      from t_file_data
+      where FILE_ID = #{fileId,jdbcType=INTEGER} and ROW_TYPE = 1 and ROW_INDEX = -1
+    </select>
+</mapper>
