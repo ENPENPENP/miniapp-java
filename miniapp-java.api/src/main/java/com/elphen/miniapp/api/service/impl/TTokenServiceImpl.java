@@ -7,6 +7,7 @@ import com.elphen.miniapp.domain.entity.TToken;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Service
 public class TTokenServiceImpl implements TTokenService {
@@ -57,6 +58,11 @@ public class TTokenServiceImpl implements TTokenService {
         tokenDto.setErrMsg("ok");
         tokenDto.setStatus(TokenDto.STATUS_OK);
         return tokenDto;
+    }
+
+    @Override
+    public boolean checkTokenExpire(TToken token) {
+        return token.getExpireTime().after(new Date());
     }
 }
 

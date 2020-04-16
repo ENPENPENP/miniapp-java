@@ -52,7 +52,7 @@ public class UserController {
      * @return
      */
     @GetMapping(value = "weChatSignIn")
-    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public LoginDto login(String jscode, String nickName) {
         LoginDto loginDto = null;
         if (StringUtils.isNotBlank(jscode)) {
@@ -130,7 +130,7 @@ public class UserController {
 
 
     /**
-     * 获取用户的id和姓名
+     * 获取用户的用户名
      *
      * @param userId 用户id
      * @return

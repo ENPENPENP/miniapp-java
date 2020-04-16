@@ -195,4 +195,52 @@ public class EventController {
         return dto;
     }
 
+    /**
+     * 更新表格事件为截止状态，同时更新表格信息数据
+     * @param eventId
+     * @return
+     */
+    @PostMapping("stop")
+    @Transactional(rollbackFor = Exception.class)
+    public EventDto setStop(Integer eventId) {
+        EventDto dto = null;
+        try {
+            if (null != eventId) {
+                TEvent tEvent = tEventService.selectByEventId(eventId);
+                tEvent.setIsStoped(true);
+                tEvent.getFileInfo().setIsStoped(true);
+                tEventService.updateByPrimaryKey(tEvent);
+                fileInfoService.updateByPrimaryKey(tEvent.getFileInfo());
+                List<TEvent> events = new ArrayList<>();
+                events.add(tEvent);
+                dto = EventDto.ok(events);
+            } else {
+                dto = EventDto.fail("eventId is null");
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+        }
+        return dto;
+    }
+
+    @PostMapping("switchPrivate")
+    @Transactional(rollbackFor = Exception.class)
+    public EventDto switchPrivate(Integer eventId){
+        EventDto dto = null;
+        try {
+            if (null != eventId) {
+                TEvent tEvent = tEventService.selectByEventId(eventId);
+                tEvent.setIsPrivate(!tEvent.getIsPrivate());
+                tEventService.updateByPrimaryKey(tEvent);
+                List<TEvent> events = new ArrayList<>();
+                events.add(tEvent);
+                dto = EventDto.ok(events);
+            } else {
+                dto = EventDto.fail("eventId is null");
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+        }
+        return dto;
+    }
 }

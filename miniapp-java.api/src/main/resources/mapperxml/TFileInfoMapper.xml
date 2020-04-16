@@ -174,4 +174,13 @@
         where
         FILE_ID = #{fileId,jdbcType=INTEGER}
     </select>
+  <select id="selectGeneratedFile" resultType="com.elphen.miniapp.domain.entity.TFileInfo">
+    select <include refid="Base_Column_List"/>
+    from t_file_info
+    where IS_GENERATED = TRUE
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"></include>
+        from t_file_info
+    </select>
 </mapper>

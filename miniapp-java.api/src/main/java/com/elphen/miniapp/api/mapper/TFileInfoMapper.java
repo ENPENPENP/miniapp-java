@@ -2,6 +2,8 @@ package com.elphen.miniapp.api.mapper;
 
 import com.elphen.miniapp.domain.entity.TFileInfo;
 
+import java.util.List;
+
 public interface TFileInfoMapper {
     int deleteByPrimaryKey(Integer fileId);
 
@@ -14,4 +16,8 @@ public interface TFileInfoMapper {
     int updateByPrimaryKeySelective(TFileInfo record);
 
     int updateByPrimaryKey(TFileInfo record);
+
+    List<TFileInfo> selectGeneratedFile();
+
+    List<TFileInfo> selectAll();
 }

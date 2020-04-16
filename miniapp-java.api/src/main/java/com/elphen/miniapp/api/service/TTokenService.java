@@ -20,4 +20,6 @@ public interface TTokenService {
     int updateByPrimaryKey(TToken record);
 
     TokenDto generateTokenDto(TToken tToken);
+
+    boolean checkTokenExpire(TToken token);
 }

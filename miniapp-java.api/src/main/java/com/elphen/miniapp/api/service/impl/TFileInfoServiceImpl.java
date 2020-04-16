@@ -6,6 +6,7 @@ import com.elphen.miniapp.domain.entity.TFileInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class TFileInfoServiceImpl implements TFileInfoService {
@@ -47,6 +48,16 @@ public class TFileInfoServiceImpl implements TFileInfoService {
     @Override
     public int deleteByPrimaryKey(Integer fileInfoId) {
         return tFileInfoMapper.deleteByPrimaryKey(fileInfoId);
+    }
+
+    @Override
+    public List<TFileInfo> getAllGeneratedFile() {
+        return tFileInfoMapper.selectGeneratedFile();
+    }
+
+    @Override
+    public List<TFileInfo> getAllFileInfo() {
+        return tFileInfoMapper.selectAll();
     }
 
     @Override

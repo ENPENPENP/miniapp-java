@@ -24,6 +24,8 @@ public interface TFileDataService {
 
     TFileData getColumnName(Integer fileId);
 
+    void updateRowData(List<TFileData> tFileDataList);
+
 }
 
 

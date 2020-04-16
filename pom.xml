@@ -16,10 +16,10 @@
 
     <modules>
         <module>miniapp-java.domain</module>
-        <module>miniapp-java.admin</module>
+<!--        <module>miniapp-java.admin</module>-->
         <module>miniapp-java.common</module>
         <module>miniapp-java.api</module>
-        <module>miniapp-java.authserver</module>
+<!--        <module>miniapp-java.authserver</module>-->
     </modules>
 
     <properties>
@@ -112,5 +112,4 @@
             <version>1.2.62</version>
         </dependency>
     </dependencies>
-
 </project>

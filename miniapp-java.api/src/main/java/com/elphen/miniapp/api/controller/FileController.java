@@ -1,5 +1,6 @@
 package com.elphen.miniapp.api.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.elphen.miniapp.api.service.*;
 import com.elphen.miniapp.common.dto.FileDto;
 import com.elphen.miniapp.common.utils.ExcelUtils;
@@ -147,15 +148,14 @@ public class FileController {
                     if (dataService.insert(fileData) != 0 && infoService.updateByPrimaryKey(fileInfo) != 0 && eventService.updateByPrimaryKey(event) != 0) {
 //                        将用户和事件关联起来
                         TUserEvent userEvent = tUserEventService.getByUserIdAndEventId(userId, event.getEventId());
-                        if(null == userEvent){
+                        if (null == userEvent) {
                             userEvent = new TUserEvent();
                             userEvent.setId(null);
                             userEvent.setEventId(event.getEventId());
                             userEvent.setUserId(userId);
                             userEvent.setIsEdited(true);
                             tUserEventService.insert(userEvent);
-                        }
-                        else {
+                        } else {
                             userEvent.setIsEdited(true);
                             tUserEventService.updateByPrimaryKey(userEvent);
                         }
@@ -236,16 +236,19 @@ public class FileController {
         FileDto dto = null;
         try {
             if (null != fileId) {
+//                获取文件信息
                 TFileInfo fileInfo = infoService.selectByFileId(fileId);
+//                获取token信息
                 TToken tToken = tokenService.getByToken(token);
+//                检查是否存在相应的文件信息和token信息
                 if (null != fileInfo && null != tToken) {
-                    Date now = new Date();
-                    Date expireTime = tToken.getExpireTime();
-                    if (expireTime.after(now)) {
+//                    检查token是否过期
+                    if (tokenService.checkTokenExpire(tToken)) {
                         String filePath = fileInfo.getFilePath();
                         String realFileName = fileInfo.getFileName();
+//                        获取文件路径
                         file = new File(request.getServletContext().getRealPath(".") + "\\" + filePath);
-                        System.out.println(file.getPath());
+//                        检查文件是否存在
                         if (file.exists()) {
                             byte[] buff = new byte[1024];
                             os = response.getOutputStream();
@@ -289,5 +292,23 @@ public class FileController {
         }
         logger.info("download file success");
         return dto;
+    }
+
+    @PostMapping("updateData")
+    @Transactional(rollbackFor = Exception.class)
+    public FileDto updateData(@RequestParam("fileId") Integer fileId ,@RequestParam("fileDataList") String fileDataListJson) {
+        FileDto dto = null;
+        try {
+            if (StringUtils.isNotEmpty(fileDataListJson)) {
+                TFileInfo tFileInfo = infoService.selectByFileId(fileId);
+                List<TFileData> tFileDataList = JSON.parseArray(fileDataListJson, TFileData.class);
+                dataService.updateRowData(tFileDataList);
+                tFileInfo.setUpdateTime(new Date());
+                infoService.updateByPrimaryKey(tFileInfo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -114,4 +114,8 @@
       from t_file_data
       where FILE_ID = #{fileId,jdbcType=INTEGER} and ROW_TYPE = 1 and ROW_INDEX = -1
     </select>
+    <update id="updateRowData">
+      update t_file_data set ROW_DATA = #{rowData,jdbcType=VARCHAR}
+      where ROW_INDEX =  #{rowIndex,jdbcType=INTEGER} and FILE_ID = #{fileId,jdbcType=INTEGER}
+    </update>
 </mapper>

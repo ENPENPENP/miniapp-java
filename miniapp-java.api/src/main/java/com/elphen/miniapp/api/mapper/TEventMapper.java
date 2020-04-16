@@ -32,4 +32,6 @@ public interface TEventMapper {
     TEvent selectByFileId(Integer fileId);
 
     List<TEvent> selectByUserEvent(List<TUserEvent> userEventList);
+
+    List<TEvent> selectAll();
 }

@@ -243,4 +243,8 @@
         </foreach>
       </where>
     </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select <include refid="UsingAlias_Column_List-1"></include>
+      from t_event as te inner join t_file_info as tfi on te.FILE_ID = tfi.FILE_ID
+    </select>
 </mapper>

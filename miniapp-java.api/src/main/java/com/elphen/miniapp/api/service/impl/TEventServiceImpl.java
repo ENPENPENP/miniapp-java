@@ -80,6 +80,11 @@ public class TEventServiceImpl implements TEventService {
         return tEventMapper.selectByUserEvent(userEventList);
     }
 
+    @Override
+    public List<TEvent> getAllEvent() {
+        return tEventMapper.selectAll();
+    }
+
 }
 
 

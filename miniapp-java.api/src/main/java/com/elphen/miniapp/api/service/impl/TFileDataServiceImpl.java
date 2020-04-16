@@ -59,6 +59,13 @@ public class TFileDataServiceImpl implements TFileDataService {
         return tFileDataMapper.selectColNameDataByFileId(fileId);
     }
 
+    @Override
+    public void updateRowData(List<TFileData> tFileDataList) {
+        for (TFileData tFileData : tFileDataList) {
+            tFileDataMapper.updateRowData(tFileData.getFileId(),tFileData.getRowIndex(),tFileData.getRowData().toString());
+        }
+    }
+
 }
 
 

@@ -33,6 +33,8 @@ public interface TEventService {
     TEvent getEventByFileId(Integer fileId);
 
     List<TEvent> getByUserEvent(List<TUserEvent> userEventList);
+
+    List<TEvent> getAllEvent();
 }
 
 

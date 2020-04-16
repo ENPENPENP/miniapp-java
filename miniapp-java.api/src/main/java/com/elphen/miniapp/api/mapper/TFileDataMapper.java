@@ -23,4 +23,6 @@ public interface TFileDataMapper {
     List<TFileData> selectAllByFileId(Integer fileId);
 
     TFileData selectColNameDataByFileId(Integer fileId);
+
+    int updateRowData(@Param("fileId")Integer fileId, @Param("rowIndex") Integer rowIndex, @Param("rowData") String rowData);
 }
